@@ -1,6 +1,9 @@
 import os 
 import yaml
 import joblib
+import json
+import pandas as pd
+import datetime
 
 import pandas as pd 
 from logging import Logger
@@ -75,3 +78,56 @@ def save_artifacts(artifact, artifact_path : str, logger: Logger) -> None:
     except Exception as e: 
         logger.error("Unexpected Error occued while saving the artifact : %s",e )
         raise
+
+def log_dataset_profile(
+    df: pd.DataFrame,
+    dataset_name: str,
+    output_path: str,
+    bucket_name: str | None = None,
+    object_key: str | None = None,
+) -> None:
+    """
+    Generates a dataset profiling report and saves it as JSON.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Dataset to profile
+    dataset_name : str
+        Logical dataset name
+    output_path : str
+        Path where report should be saved
+    bucket_name : str, optional
+        Storage bucket name (MinIO/S3)
+    object_key : str, optional
+        Object path in storage
+    """
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+    profile = {
+        "dataset_name": dataset_name,
+        "timestamp": str(datetime.datetime.now(datetime.UTC)),
+        "storage_info": {
+            "bucket_name": bucket_name,
+            "object_key": object_key,
+        },
+        "shape": {
+            "rows": int(df.shape[0]),
+            "columns": int(df.shape[1]),
+        },
+        "duplicates": int(df.duplicated().sum()),
+        "memory_usage_mb": round(df.memory_usage(deep=True).sum() / (1024**2), 2),
+        "columns": {},
+    }
+
+    for col in df.columns:
+        profile["columns"][col] = {
+            "dtype": str(df[col].dtype),
+            "null_count": int(df[col].isnull().sum()),
+            "null_percentage": round((df[col].isnull().mean()) * 100, 2),
+            "unique_values": int(df[col].nunique()),
+        }
+
+    with open(output_path, "w") as f:
+        json.dump(profile, f, indent=4)

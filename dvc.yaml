@@ -1,0 +1,11 @@
+stages:
+  data_ingestion:
+    cmd: python -m src.components.data_ingestion
+    deps:
+      - src/components/data_ingestion.py
+      - src/storage/minio_client.py
+      - src/helpers/load_save.py
+      - config/training.yaml
+    outs:
+      - data/raw/customer_churn.csv
+      - artifacts/reports/data_ingestion_profile.json

@@ -1,9 +1,7 @@
-import sys
-import logging
-
 from logging import Logger
+from types import ModuleType
 
-def error_message_detail(error : Exception, error_detail : sys, logger : Logger) -> str: 
+def error_message_detail(error : Exception, error_detail : ModuleType, logger : Logger) -> str:
     """
     Extracts details error information including file name, line numberr, and the error message. 
     """
@@ -19,7 +17,7 @@ class MyException(Exception):
     """
     Custom exception class for handling errors
     """
-    def __init__(self, error_message : Exception, error_detail : sys, logger : Logger):
+    def __init__(self, error_message : Exception, error_detail : ModuleType, logger : Logger):
         """
         Initializes the Exception with a detailed error message
         """

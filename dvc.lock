@@ -1,0 +1,30 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python -m src.components.data_ingestion
+    deps:
+    - path: config/training.yaml
+      hash: md5
+      md5: 076fa93d4417a5dab720ecf3ccf8db81
+      size: 210
+    - path: src/components/data_ingestion.py
+      hash: md5
+      md5: 1caf34c03d4b6f201c99a2bd2b241672
+      size: 2797
+    - path: src/helpers/load_save.py
+      hash: md5
+      md5: 2191e67ec653e66d37792042e293dab2
+      size: 4392
+    - path: src/storage/minio_client.py
+      hash: md5
+      md5: bee8f40b3ec8c37ae0deecf5a54388f2
+      size: 3086
+    outs:
+    - path: artifacts/reports/data_ingestion_profile.json
+      hash: md5
+      md5: 43cc2264f2b9cb7e24151cf39abb072a
+      size: 3950
+    - path: data/raw/customer_churn.csv
+      hash: md5
+      md5: 0f9de68e012bd3aed5fa7cdc9fc421af
+      size: 977501

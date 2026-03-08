@@ -1,0 +1,6 @@
+DataIngestion:
+  bucket_name: saas-retention-engine
+  object_key: raw/customer_churn.csv
+  local_path: data/raw/customer_churn.csv
+
+  output_profile_path : "artifacts/reports/data_ingestion_profile.json"

@@ -208,3 +208,6 @@ __marimo__/
 
 
 infrastructure/
+notebooks/
+data/
+artifacts/

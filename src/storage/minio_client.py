@@ -44,7 +44,7 @@ class MinIOClient:
         try:
             self.client.head_bucket(Bucket=self.bucket_name)
         except ClientError:
-            self.client.create_bucket(Bucket=self.bucket_name)
+            raise FileNotFoundError(f'{self.bucket_name} not found')
 
 
     def upload_file(self, local_path: str, object_key: str):
