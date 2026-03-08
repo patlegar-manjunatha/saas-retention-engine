@@ -7,3 +7,4 @@ uvicorn
 pytest
 boto3
 ipykernel
+dvc-s3

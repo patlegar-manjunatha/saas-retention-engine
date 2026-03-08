@@ -1,0 +1,5 @@
+[core]
+    remote = minio
+['remote "minio"']
+    url = s3://dvc-saas-storage/dvc-storage
+    endpointurl = http://127.0.0.1:9000
