@@ -5,3 +5,4 @@ mlflow
 fastapi
 uvicorn
 pytest
+boto3
