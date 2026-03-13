@@ -9,3 +9,16 @@ stages:
     outs:
       - data/raw/customer_churn.csv
       - artifacts/reports/data_ingestion_profile.json
+
+  data_transformation:
+    cmd: python -m src.components.data_transformation
+    deps:
+      - src/components/data_transformation.py
+      - config/training.yaml
+      - data/raw/customer_churn.csv
+    outs:
+      - data/preprocessed/train.csv
+      - data/preprocessed/test.csv
+      - data/transformed/train_data.npz
+      - data/transformed/test_data.npz
+      - artifacts/preprocessing/data_preprocessor.joblib
