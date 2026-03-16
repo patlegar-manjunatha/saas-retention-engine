@@ -1,0 +1,25 @@
+data_set_schema:
+  id_column: "customerID"
+  target: "Churn"
+  numerical_columns: 
+    - "TotalCharges"
+    - "MonthlyCharges"
+    - "tenure"
+  binary_columns: 
+    - "SeniorCitizen"
+    - "Partner"
+    - "Dependents"
+    - "PhoneService"
+    - "MultipleLines"
+    - "OnlineSecurity"
+    - "OnlineBackup"
+    - "DeviceProtection"
+    - "TechSupport"
+    - "StreamingTV"
+    - "StreamingMovies"
+    - "PaperlessBilling"
+  categorical_columns: 
+    - "gender"
+    - "InternetService"
+    - "Contract"
+    - "PaymentMethod"

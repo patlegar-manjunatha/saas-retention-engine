@@ -14,7 +14,10 @@ stages:
     cmd: python -m src.components.data_transformation
     deps:
       - src/components/data_transformation.py
+      - src/storage/minio_client.py
+      - src/helpers/load_save.py
       - config/training.yaml
+      - config/schema.yaml
       - data/raw/customer_churn.csv
     outs:
       - data/preprocessed/train.csv
@@ -22,3 +25,5 @@ stages:
       - data/transformed/train_data.npz
       - data/transformed/test_data.npz
       - artifacts/preprocessing/data_preprocessor.joblib
+      - artifacts/reports/train_profile.json
+      - artifacts/reports/test_profile.json
