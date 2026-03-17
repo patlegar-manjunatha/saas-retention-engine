@@ -16,3 +16,14 @@ DataTransformation:
     test: "artifacts/reports/test_profile.json"
   artifacts: 
     preprocessor: "artifacts/preprocessing/data_preprocessor.joblib"
+
+ModelTraining:
+  bucket_name: "saas-retention-engine"
+  data_path: "data/transformed/train_data.npz"
+  selected_model: "RandomForest"    # Switch to "XGBoost" or "LogisticRegression" here!
+  n_trials: 20                      # How many Bayesian guesses Optuna should make
+  optuna_scoring: "f1"              # The metric to optimize during cross-validation
+  experiment_name: "SaaS-Retention-Training"
+  output_paths:
+    model: "artifacts/models/trained_model.joblib"
+    optuna_report: "artifacts/reports/optuna_study.json"

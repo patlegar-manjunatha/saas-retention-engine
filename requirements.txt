@@ -8,3 +8,6 @@ pytest
 boto3
 ipykernel
 dvc-s3
+optuna
+optuna-integration
+skops

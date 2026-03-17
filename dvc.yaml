@@ -27,3 +27,15 @@ stages:
       - artifacts/preprocessing/data_preprocessor.joblib
       - artifacts/reports/train_profile.json
       - artifacts/reports/test_profile.json
+
+  model_training:
+    cmd: python -m src.components.model_training
+    deps:
+      - src/components/model_training.py
+      - src/helpers/model_factory.py
+      - src/storage/minio_client.py
+      - config/training.yaml
+      - data/transformed/train_data.npz
+    outs:
+      - artifacts/models/trained_model.joblib
+      - artifacts/reports/optuna_study.json

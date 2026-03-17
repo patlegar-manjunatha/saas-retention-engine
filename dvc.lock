@@ -5,8 +5,8 @@ stages:
     deps:
     - path: config/training.yaml
       hash: md5
-      md5: 5ef8d2e39a480ffa18f8ce55de27982b
-      size: 686
+      md5: a1b3b0e7d7619a73335a3999be65f11c
+      size: 1224
     - path: src/components/data_ingestion.py
       hash: md5
       md5: 1caf34c03d4b6f201c99a2bd2b241672
@@ -22,7 +22,7 @@ stages:
     outs:
     - path: artifacts/reports/data_ingestion_profile.json
       hash: md5
-      md5: 70359c1efa37a991755b8bc590c29a6e
+      md5: c72c7763050fb5554c01fd1ba832ba57
       size: 3950
     - path: data/raw/customer_churn.csv
       hash: md5
@@ -37,8 +37,8 @@ stages:
       size: 544
     - path: config/training.yaml
       hash: md5
-      md5: 5ef8d2e39a480ffa18f8ce55de27982b
-      size: 686
+      md5: a1b3b0e7d7619a73335a3999be65f11c
+      size: 1224
     - path: data/raw/customer_churn.csv
       hash: md5
       md5: 0f9de68e012bd3aed5fa7cdc9fc421af
@@ -62,11 +62,11 @@ stages:
       size: 6053
     - path: artifacts/reports/test_profile.json
       hash: md5
-      md5: b45b049fc6d957a4c3606e4c5453d8c9
+      md5: b137ce9bbf8e48ca95f9657851cfcda4
       size: 3934
     - path: artifacts/reports/train_profile.json
       hash: md5
-      md5: 1433d61848036120ab69ba081941f1cd
+      md5: 68ce7eb112840ad3b2bff796b4d888af
       size: 3937
     - path: data/preprocessed/test.csv
       hash: md5
@@ -84,3 +84,35 @@ stages:
       hash: md5
       md5: 49d4529da69179e8032bd58c5e08dd5a
       size: 143125
+  model_training:
+    cmd: python -m src.components.model_training
+    deps:
+    - path: config/training.yaml
+      hash: md5
+      md5: a1b3b0e7d7619a73335a3999be65f11c
+      size: 1224
+    - path: data/transformed/train_data.npz
+      hash: md5
+      md5: 49d4529da69179e8032bd58c5e08dd5a
+      size: 143125
+    - path: src/components/model_training.py
+      hash: md5
+      md5: fb4580e66d2095ecbc9034cea845d600
+      size: 7319
+    - path: src/helpers/model_factory.py
+      hash: md5
+      md5: f49817ef35da7a1923fb2e14e92b86a5
+      size: 2458
+    - path: src/storage/minio_client.py
+      hash: md5
+      md5: bee8f40b3ec8c37ae0deecf5a54388f2
+      size: 3086
+    outs:
+    - path: artifacts/models/trained_model.joblib
+      hash: md5
+      md5: 332f0a1dfc7e4da0af93ba0dbf0c6127
+      size: 4779193
+    - path: artifacts/reports/optuna_study.json
+      hash: md5
+      md5: e4f955806720817a4e9ed069d4fef738
+      size: 193
